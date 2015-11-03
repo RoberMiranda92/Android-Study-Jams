@@ -5,6 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:maxHeight="@dimen/list_item_height"
     android:minHeight="@dimen/list_item_height"
     android:text="@string/list_item_text_example"/>

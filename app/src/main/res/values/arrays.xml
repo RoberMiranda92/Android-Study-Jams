@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="forecast_list">
+        <item>"Today - Sunny - 83/63"</item>
+        <item>"Tomorrow - Foggy - 70/46"</item>
+        <item>"Weds - Cloudy - 72/63"</item>
+        <item>"Thurs - Rainy - 64/51"</item>
+        <item>"Fri - Foggy - 83/63"</item>
+        <item>"Sat - Sunny -76/68"</item>
+    </string-array>
+</resources>
