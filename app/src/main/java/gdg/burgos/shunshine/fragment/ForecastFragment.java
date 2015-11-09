@@ -1,6 +1,8 @@
-package gdg.burgos.shunshine;
+package gdg.burgos.shunshine.fragment;
 
-import android.os.Build;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,15 +12,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.zip.Inflater;
 
+import gdg.burgos.shunshine.R;
+import gdg.burgos.shunshine.activity.DetailActivity;
 import gdg.burgos.shunshine.adapter.ForecastListAdapter;
 import gdg.burgos.shunshine.tasks.FetchWeatherTask;
 
@@ -64,6 +65,17 @@ public class ForecastFragment extends Fragment {
             }
         });
 
+
+        forecastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String foreCastItem = forecastAdapter.getItem(position);
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra(Intent.EXTRA_TEXT, foreCastItem);
+                startActivity(intent);
+            }
+        });
+
         return mView;
     }
 
@@ -85,9 +97,19 @@ public class ForecastFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        getWeather();
+    }
+
     private void getWeather() {
+
         FetchWeatherTask task = new FetchWeatherTask(this);
-        task.execute("09001");
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String location = preferences.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
+        task.execute(location);
     }
 
     public void addData(String[] result) {

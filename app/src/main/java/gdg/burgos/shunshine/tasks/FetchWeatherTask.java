@@ -1,7 +1,9 @@
 package gdg.burgos.shunshine.tasks;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
 
@@ -18,8 +20,8 @@ import java.net.URL;
 
 import java.text.SimpleDateFormat;
 
-import gdg.burgos.shunshine.BuildConfig;
-import gdg.burgos.shunshine.ForecastFragment;
+import gdg.burgos.shunshine.fragment.ForecastFragment;
+import gdg.burgos.shunshine.R;
 
 /**
  * Created by RobertoMiranda on 9/11/15.
@@ -29,6 +31,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
     private static final String LOG_TAG = "TIME";
     private final ForecastFragment fragment;
+    private String unitType;
 
 
     public FetchWeatherTask(ForecastFragment fragment) {
@@ -59,8 +62,15 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
             final String DAYS_PARAM = "cnt";
             final String API_PARAM = "APPID";
 
+
+            SharedPreferences sharedPrefs =
+                    PreferenceManager.getDefaultSharedPreferences(fragment.getActivity());
+            unitType = sharedPrefs.getString(
+                    fragment.getString(R.string.pref_temperature_units_key),
+                    fragment.getString(R.string.pref_temperature_units_default));
+
             String FORMAT_DATA = "json";
-            String UNITS_DATA = "metric";
+            String UNITS_DATA = unitType;
             String DAYS_DATA = "7";
             String zip_code = params[0];
             String API_DATA = "31ec84869f9c8dce859728ac31a7ba01";
@@ -153,9 +163,19 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
      * Prepare the weather high/lows for presentation.
      */
     private String formatHighLows(double high, double low) {
+
+
+        if (unitType.equals(fragment.getString(R.string.pref_temperature_units_imperial))) {
+            high = (high * 1.8) + 32;
+            low = (low * 1.8) + 32;
+        } else if (!unitType.equals(fragment.getString(R.string.pref_temperature_units_metric))) {
+            Log.d(LOG_TAG, "Unit type not found: " + unitType);
+        }
+
         // For presentation, assume the user doesn't care about tenths of a degree.
         long roundedHigh = Math.round(high);
         long roundedLow = Math.round(low);
+
 
         String highLowStr = roundedHigh + "/" + roundedLow;
         return highLowStr;
