@@ -18,6 +18,7 @@ import java.net.URL;
 
 import java.text.SimpleDateFormat;
 
+import gdg.burgos.shunshine.BuildConfig;
 import gdg.burgos.shunshine.ForecastFragment;
 
 /**

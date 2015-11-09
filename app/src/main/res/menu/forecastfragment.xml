@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_cloud_white_24dp"
         android:title="@string/action_refresh"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
 
 
 </menu>

@@ -1,5 +1,7 @@
 package gdg.burgos.shunshine;
 
+import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ public class ForecastFragment extends Fragment {
     private int forecasTextViewID;
     private ArrayList<String> forecastData;
     private ListView forecastListView;
+    FloatingActionButton fab;
 
 
     @Override
@@ -37,6 +40,7 @@ public class ForecastFragment extends Fragment {
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        fab = (FloatingActionButton) mView.findViewById(R.id.fab);
 
         setHasOptionsMenu(true);
         /**
@@ -53,6 +57,12 @@ public class ForecastFragment extends Fragment {
 
         forecastListView.setAdapter(forecastAdapter);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getWeather();
+            }
+        });
 
         return mView;
     }
@@ -68,12 +78,16 @@ public class ForecastFragment extends Fragment {
 
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            FetchWeatherTask task = new FetchWeatherTask(this);
-            task.execute("09001");
+            getWeather();
             return true;
         }
         return super.onOptionsItemSelected(item);
 
+    }
+
+    private void getWeather() {
+        FetchWeatherTask task = new FetchWeatherTask(this);
+        task.execute("09001");
     }
 
     public void addData(String[] result) {
