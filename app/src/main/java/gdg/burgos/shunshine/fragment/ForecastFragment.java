@@ -2,10 +2,12 @@ package gdg.burgos.shunshine.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +36,7 @@ public class ForecastFragment extends Fragment {
     private ArrayList<String> forecastData;
     private ListView forecastListView;
     FloatingActionButton fab;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -42,6 +45,7 @@ public class ForecastFragment extends Fragment {
         View mView = inflater.inflate(R.layout.fragment_main, container, false);
 
         fab = (FloatingActionButton) mView.findViewById(R.id.fab);
+        swipeRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.swiperefresh);
 
         setHasOptionsMenu(true);
         /**
@@ -50,7 +54,7 @@ public class ForecastFragment extends Fragment {
 
         forecastItemLayoutID = R.layout.list_item_forecast;
         forecasTextViewID = R.id.list_item_forecast_textview;
-        forecastData = new ArrayList<String>();
+        forecastData = new ArrayList<>();
 
         forecastAdapter = new ForecastListAdapter(getContext(), forecastItemLayoutID, forecasTextViewID, forecastData);
 
@@ -76,6 +80,21 @@ public class ForecastFragment extends Fragment {
             }
         });
 
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getWeather();
+                    }
+                }, 700);
+
+            }
+        });
+
         return mView;
     }
 
@@ -98,7 +117,7 @@ public class ForecastFragment extends Fragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         getWeather();
     }
@@ -113,6 +132,8 @@ public class ForecastFragment extends Fragment {
     }
 
     public void addData(String[] result) {
+
+        swipeRefreshLayout.setRefreshing(false);
         if (result != null) {
             forecastAdapter.clear();
             for (String dayForecast : result)
