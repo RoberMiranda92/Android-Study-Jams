@@ -1,4 +1,4 @@
-package gdg.burgos.shunshine.activity;
+package gdg.burgos.sunshine.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import gdg.burgos.shunshine.R;
+import gdg.burgos.sunshine.R;
 
 public class DetailActivity extends AppCompatActivity {
 

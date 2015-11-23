@@ -1,4 +1,4 @@
-package gdg.burgos.shunshine.tasks;
+package gdg.burgos.sunshine.tasks;
 
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -20,8 +20,8 @@ import java.net.URL;
 
 import java.text.SimpleDateFormat;
 
-import gdg.burgos.shunshine.fragment.ForecastFragment;
-import gdg.burgos.shunshine.R;
+import gdg.burgos.sunshine.fragment.ForecastFragment;
+import gdg.burgos.sunshine.R;
 
 /**
  * Created by RobertoMiranda on 9/11/15.

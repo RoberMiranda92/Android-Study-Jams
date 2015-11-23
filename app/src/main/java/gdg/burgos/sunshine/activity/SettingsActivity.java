@@ -1,15 +1,13 @@
-package gdg.burgos.shunshine.activity;
+package gdg.burgos.sunshine.activity;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.view.KeyEvent;
 
-import gdg.burgos.shunshine.R;
+import gdg.burgos.sunshine.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.

@@ -1,4 +1,4 @@
-package gdg.burgos.shunshine;
+package gdg.burgos.sunshine;
 
 import android.util.Log;
 

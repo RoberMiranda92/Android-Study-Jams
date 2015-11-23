@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="gdg.burgos.shunshine">
+    package="gdg.burgos.sunshine">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="gdg.burgos.sunshine.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,16 +21,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.DetailActivity"
+            android:name="gdg.burgos.sunshine.activity.DetailActivity"
             android:label="@string/title_activity_detail"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="gdg.burgos.sunshine.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value="gdg.burgos.sunshine.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.SettingsActivity"
+            android:name="gdg.burgos.sunshine.activity.SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
     </application>
 

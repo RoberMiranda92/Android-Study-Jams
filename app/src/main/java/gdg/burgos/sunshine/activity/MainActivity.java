@@ -1,4 +1,4 @@
-package gdg.burgos.shunshine.activity;
+package gdg.burgos.sunshine.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import gdg.burgos.shunshine.R;
+import gdg.burgos.sunshine.R;
 
 public class MainActivity extends AppCompatActivity {
 

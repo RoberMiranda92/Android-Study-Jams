@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.MainActivity">
+    tools:context="gdg.burgos.sunshine.activity.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -11,7 +11,8 @@
         android:id="@+id/action_map"
         android:orderInCategory="100"
         android:title="@string/action_maps"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_cloud_white_24dp"
+        app:showAsAction="always" />
 
 
 </menu>

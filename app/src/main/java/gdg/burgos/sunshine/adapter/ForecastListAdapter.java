@@ -1,4 +1,4 @@
-package gdg.burgos.shunshine.adapter;
+package gdg.burgos.sunshine.adapter;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

@@ -1,4 +1,4 @@
-package gdg.burgos.shunshine.fragment;
+package gdg.burgos.sunshine.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,10 +20,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import gdg.burgos.shunshine.R;
-import gdg.burgos.shunshine.activity.DetailActivity;
-import gdg.burgos.shunshine.adapter.ForecastListAdapter;
-import gdg.burgos.shunshine.tasks.FetchWeatherTask;
+import gdg.burgos.sunshine.R;
+import gdg.burgos.sunshine.activity.DetailActivity;
+import gdg.burgos.sunshine.adapter.ForecastListAdapter;
+import gdg.burgos.sunshine.tasks.FetchWeatherTask;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -120,6 +120,11 @@ public class ForecastFragment extends Fragment {
     public void onStart() {
         super.onStart();
         getWeather();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
     }
 
     private void getWeather() {
