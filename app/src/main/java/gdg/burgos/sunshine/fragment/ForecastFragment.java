@@ -129,22 +129,10 @@ public class ForecastFragment extends Fragment {
 
     private void getWeather() {
 
-        FetchWeatherTask task = new FetchWeatherTask(this);
+        FetchWeatherTask task = new FetchWeatherTask(getContext(),forecastAdapter);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String location = preferences.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
         task.execute(location);
-    }
-
-    public void addData(String[] result) {
-
-        swipeRefreshLayout.setRefreshing(false);
-        if (result != null) {
-            forecastAdapter.clear();
-            for (String dayForecast : result)
-
-                forecastAdapter.add(dayForecast);
-        } else
-            Toast.makeText(getContext(), "Error Obteniendo Datos", Toast.LENGTH_SHORT).show();
     }
 }

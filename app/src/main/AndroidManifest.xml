@@ -32,6 +32,10 @@
         <activity
             android:name="gdg.burgos.sunshine.activity.SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
+
+        <provider
+            android:name=".data.WeatherProvider"
+            android:authorities="gdg.burgos.sunshine" />
     </application>
 
 </manifest>
