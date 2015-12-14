@@ -2,34 +2,34 @@ package gdg.burgos.sunshine.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import gdg.burgos.sunshine.R;
+import gdg.burgos.sunshine.fragment.DetailActivityFragment;
 
 public class DetailActivity extends AppCompatActivity {
-
-    private static String weatherInformation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_detail, new PlaceholderFragment())
-                    .commit();
+            // Create the detail fragment and add it to the activity
+            // using a fragment transaction.
+
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(DetailActivityFragment.DETAIL_URI, getIntent().getData());
+
+            DetailActivityFragment fragment = new DetailActivityFragment();
+            fragment.setArguments(arguments);
+
+            getSupportFragmentManager().beginTransaction().add(R.id.weather_detail_container, fragment).commit();
         }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_detail);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -47,52 +47,12 @@ public class DetailActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(DetailActivity.this, SettingsActivity.class);
-            startActivity(intent);
-        }
-        if (id == R.id.menu_item_share) {
-            share();
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void share() {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, weatherInformation);
-        shareIntent.setType("text/plain");
-        startActivity(shareIntent);
-    }
-
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-
-        public PlaceholderFragment() {
-        }
-
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            Intent intent = getActivity().getIntent();
-
-            View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-            if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
-                TextView detail_text = (TextView) rootView.findViewById(R.id.detail_text);
-                detail_text.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
-                weatherInformation = intent.getStringExtra(Intent.EXTRA_TEXT);
-            }
-            return rootView;
-        }
-
-
     }
 
 }
