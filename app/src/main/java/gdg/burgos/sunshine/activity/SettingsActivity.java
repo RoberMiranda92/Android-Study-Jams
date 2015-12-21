@@ -11,6 +11,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
 import gdg.burgos.sunshine.R;
+import gdg.burgos.sunshine.sync.SunshineSyncAdapter;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
@@ -32,7 +33,7 @@ public class SettingsActivity extends PreferenceActivity
         // For all preferences, attach an OnPreferenceChangeListener so the UI summary can be
         // updated when the preference changes.
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
-        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_temperature_units_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_units_key)));
     }
 
     /**

@@ -109,17 +109,17 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.menu_detail, menu);
+        inflater.inflate(R.menu.detailfragment, menu);
 
         // Retrieve the share menu item
-        MenuItem menuItem = menu.findItem(R.id.menu_item_share);
+        MenuItem menuItem = menu.findItem(R.id.action_share);
 
         // Get the provider and hold onto it to set/change the share intent.
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
         // If onLoadFinished happens before this, we can go ahead and set the share intent now.
         if (mForecast != null) {
-            //mShareActionProvider.setShareIntent(createShareForecastIntent());
+            mShareActionProvider.setShareIntent(createShareForecastIntent());
         }
     }
 
@@ -188,12 +188,13 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
             boolean isMetric = Utility.isMetric(getActivity());
 
             double high = data.getDouble(COL_WEATHER_MAX_TEMP);
-            String highString = Utility.formatTemperature(getActivity(), high, isMetric);
+            String highString = Utility.formatTemperature(getActivity(), high);
             mHighTempView.setText(highString);
 
             // Read low temperature from cursor and update view
             double low = data.getDouble(COL_WEATHER_MIN_TEMP);
-            String lowString = Utility.formatTemperature(getActivity(), low, isMetric);
+            String lowString = Utility.formatTemperature(getActivity(), low);
+
             mLowTempView.setText(lowString);
 
             // Read humidity from cursor and update view
